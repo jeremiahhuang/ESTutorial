@@ -87,10 +87,7 @@ namespace ESTutorial
 
                 indexData.Add(sample);
             }
-            //now index it
-            // indexData.Count();
-            
-            client.IndexMany<Amazon_Commerce_Sample>(indexData);           
+            //now index it    
 
             
         }      
