@@ -32,9 +32,18 @@ namespace ESTutorial
             config = builder.Build(); 
             var services = new ServiceCollection();
             services.AddElasticsearch(config);
-            var c = services.BuildServiceProvider().GetService<IElasticClient>();
+            var client = services.BuildServiceProvider().GetService<IElasticClient>();
             //
             Console.WriteLine("Start indexing");
+
+            //create index
+            //https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/auto-map.html
+            client.Indices.Create(config["elasticsearch:index"], c=>c
+                .Map<Amazon_Commerce_Sample>(m=>m
+                        .AutoMap<Amazon_Commerce_Sample>()
+                    )
+            );
+
             // pull in dataset 
             string fileName = "amazonexample.csv";
             //get user data and enrollment data
@@ -81,8 +90,7 @@ namespace ESTutorial
             //now index it
             // indexData.Count();
             
-            c.IndexMany<Amazon_Commerce_Sample>(indexData);
-            
+            client.IndexMany<Amazon_Commerce_Sample>(indexData);           
 
             
         }      

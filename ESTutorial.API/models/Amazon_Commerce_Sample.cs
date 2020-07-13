@@ -1,11 +1,12 @@
 ﻿using Nest;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ESTutorial.ElasticsearchModels
+namespace ESTutorial.API.models
 {
-    [ElasticsearchType(IdProperty = "ID")]
+    [ElasticsearchType(IdProperty = "ID",RelationName = "amazonsample")]
     public class Amazon_Commerce_Sample
     {
         public Amazon_Commerce_Sample()
